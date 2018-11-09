@@ -41,7 +41,7 @@ class InputTaker extends React.Component{
 
     render(){
         return(
-            <input value={this.state.value} onKeyDown={this.keyPress} onChange={this.handleChange} fullWidth={true} />
+            <input className="new-todo" autoFocus={true} type="text" value={this.state.value} onKeyDown={this.keyPress} onChange={this.handleChange} placeholder="What needs to be done?" fullWidth={true} />
         )
     }
 }
