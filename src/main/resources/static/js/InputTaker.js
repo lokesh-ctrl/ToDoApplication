@@ -1,26 +1,6 @@
-import {TodoHeader} from "./todoheader";
+const React = require('react')
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-
-class App extends React.Component{
-    render(){
-        <Index/>,document.getElementById("app")
-    }
-
-}
-
-class Index extends React.Component{
-    render(){
-        return(
-            <div>
-            <TodoHeader/>
-            <InputTaker />
-            </div>)
-    }
-}
-
-class InputTaker extends React.Component{
+export class InputTaker extends React.Component{
     constructor(props) {
         super(props);
         this.state = {value:''}
