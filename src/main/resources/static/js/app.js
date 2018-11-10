@@ -13,22 +13,22 @@ export class App extends React.Component {
                 {
                     id: 1,
                     taskName: "hi5",
-                    updateStatusOfTask: false
+                    isFinished: false
                 },
                 {
                     id: 2,
                     taskName: "hi4",
-                    updateStatusOfTask: false
+                    isFinished: true
                 },
                 {
                     id: 4,
                     taskName: "hi3",
-                    updateStatusOfTask: false
+                    isFinished: true
                 },
                 {
                     id: 5,
                     taskName: "hi2",
-                    updateStatusOfTask: false
+                    isFinished: false
                 }
             ]
         }

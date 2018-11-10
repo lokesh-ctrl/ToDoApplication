@@ -14,6 +14,9 @@
 node_modules
 .package-lock.json.icloud
 package-lock.json
+bundle.js
+bundle.js.map
+
 
 ### IntelliJ IDEA ###
 .idea
