@@ -1,5 +1,6 @@
 import {TodoHeader} from "./todoheader";
 import {InputTaker} from "./InputTaker";
+import {ToDoItemsList} from "./ToDoItemsList";
 
 const React = require('react')
 export class Index extends React.Component{
@@ -8,6 +9,7 @@ export class Index extends React.Component{
             <div>
                 <TodoHeader/>
                 <InputTaker />
+                <ToDoItemsList/>
             </div>)
     }
 }
