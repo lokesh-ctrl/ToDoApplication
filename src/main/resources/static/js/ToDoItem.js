@@ -1,22 +1,23 @@
-const React = require('react')
+const React = require('react');
+
 
 export class ToDoItem extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            id: null,
+            taskName: null,
+            isChecked: null
+        };
         this.deleteTask = this.deleteTask.bind(this);
-        this.updateStatusOfTask = this.updateStatusOfTask.bind(this)
+        this.updateStatusOfTask = this.updateStatusOfTask.bind(this);
+        this.renderTask = this.renderTask.bind(this)
     }
 
-    render() {
-        deleteTask()
-        {
-            //remove this task in db
-        }
-        updateStatusOfTask()
-        {
-            //update status of task in db
-        }
+    componentAboutToMount(){
+    }
 
+    renderTask() {
         return (
             <div className="viewtask">
                 <input id="checkBoxOfTask" onClick={this.updateStatusOfTask} type="checkbox"
@@ -25,5 +26,18 @@ export class ToDoItem extends React.Component {
                 <button id="deleteTask" onClick={this.deleteTask()}/>
             </div>
         )
+    }
+
+    deleteTask() {
+
+    }
+
+    updateStatusOfTask() {
+        //update status of task in db
+    }
+
+
+    render() {
+        return this.renderTask()
     }
 }

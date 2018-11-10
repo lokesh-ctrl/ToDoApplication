@@ -3,13 +3,14 @@ import {InputTaker} from "./InputTaker";
 import {ToDoItemsList} from "./ToDoItemsList";
 
 const React = require('react')
-export class Index extends React.Component{
-    render(){
-        return(
+
+export class Index extends React.Component {
+    render() {
+        return (
             <div>
                 <TodoHeader/>
-                <InputTaker />
-                <ToDoItemsList/>
+                <InputTaker/>
+                <ToDoItemsList taskList={this.props.tasks}/>
             </div>)
     }
 }

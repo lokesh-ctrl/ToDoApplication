@@ -13,6 +13,7 @@
 
 node_modules
 .package-lock.json.icloud
+package-lock.json
 
 ### IntelliJ IDEA ###
 .idea
