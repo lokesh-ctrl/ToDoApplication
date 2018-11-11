@@ -32,9 +32,16 @@ export class App extends React.Component {
                 }
             ]
         }
+        this.getTasksFromDb = this.getTasksFromDb.bind(this)
+        this.clearCompleted = this.clearCompleted.bind(this)
+        this.clearCompletedInDb = this.clearCompletedInDb.bind(this)
     }
 
     componentDidMount() {
+        this.getTasksFromDb()
+    }
+
+    getTasksFromDb() {
         axios({
             method: 'get',
             url: '/tasks',
@@ -49,6 +56,26 @@ export class App extends React.Component {
         return (
             <Index tasks={this.state.tasks}/>
         )
+    }
+
+    clearCompleted() {
+        this.clearCompletedInDb()
+        this.getTasksFromDb()
+    }
+
+    clearCompletedInDb() {
+        this.state.tasks.map(function (task, index) {
+            deleteTask(task.id)
+        })
+    }
+
+    deleteTask(taskId) {
+        axios({
+            method: 'delete',
+            url: '/tasks' + taskId
+        }).then(function (response) {
+            console.log(response);
+        })
     }
 
 }
