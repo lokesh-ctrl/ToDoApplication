@@ -26,28 +26,24 @@ export class ToDoItem extends React.Component {
         )
     }
 
-    deleteTask(id) {
-        // axios({
-        //     method: 'delete',
-        //     url: '/tasks'+id
-        // }).then(function (response) {
-        //     console.log(response);
-        // })
+    deleteTask(e) {
+        e.preventDefault()
+
     }
 
     updateStatusOfTask(id) {
         this.setState(prevState => ({
             isChecked: !prevState.isChecked
         }))
-        // axios({
-        //     method:'put',
-        //     url:'/tasks'+id,
-        //     data:{
-        //         id:this.state.id,
-        //         taskName:this.state.taskName,
-        //         isChecked:this.state.isChecked
-        //     }
-        // })
+        axios({
+            method:'put',
+            url:'/tasks'+id,
+            data:{
+                id:this.state.id,
+                taskName:this.state.taskName,
+                isChecked:this.state.isChecked
+            }
+        })
     }
 
 

@@ -4,7 +4,7 @@ export class Footer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pendingTasksCount: 0,
+            pendingTasksCount: 1,
             completedTasksCount: 0
         }
         this.renderFooter = this.renderFooter.bind(this)
@@ -43,6 +43,11 @@ export class Footer extends React.Component {
                 </footer>
             )
         }
+        else{
+            return(
+                <div></div>
+            )
+        }
     }
 
     renderClearCompletedDiv() {
@@ -52,9 +57,9 @@ export class Footer extends React.Component {
                 </div>
             )
         }
-        else {
-            return
-        }
+        else return (
+            <div></div>
+        )
     }
 
     clearCompleted(){

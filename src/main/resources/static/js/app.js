@@ -35,6 +35,7 @@ export class App extends React.Component {
         this.getTasksFromDb = this.getTasksFromDb.bind(this)
         this.clearCompleted = this.clearCompleted.bind(this)
         this.clearCompletedInDb = this.clearCompletedInDb.bind(this)
+        this.deleteTask = this.deleteTask.bind(this)
     }
 
     componentDidMount() {
@@ -54,7 +55,7 @@ export class App extends React.Component {
 
     render() {
         return (
-            <Index tasks={this.state.tasks}/>
+            <Index onClearCompleted={this.clearCompleted} addTask deleteATask={this.deleteTask} updateTasks={this.getTasksFromDb} tasks={this.state.tasks}/>
         )
     }
 
@@ -65,7 +66,9 @@ export class App extends React.Component {
 
     clearCompletedInDb() {
         this.state.tasks.map(function (task, index) {
-            deleteTask(task.id)
+            if (task.isFinished) {
+                deleteTask(task.id)
+            }
         })
     }
 
