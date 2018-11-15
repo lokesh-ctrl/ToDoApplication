@@ -4,9 +4,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
-class FirebaseProperties {
+class FirebasePropertiesFromFile implements FireBaseProperties {
 
     private static final String PROJECT_URL;
+    private static final String PROJECT_ID;
 
     static {
         Properties properties = new Properties ( );
@@ -18,9 +19,17 @@ class FirebaseProperties {
             e.printStackTrace ( );
         }
         PROJECT_URL = properties.getProperty ( "PROJECT_URL" );
+        PROJECT_ID = properties.getProperty ( "PROJECT_ID" );
     }
 
-    public static String getProjectUrl() {
+    @Override
+    public String getProjectURL() {
         return PROJECT_URL;
     }
+
+    @Override
+    public String getProjectId() {
+        return PROJECT_ID;
+    }
+
 }
