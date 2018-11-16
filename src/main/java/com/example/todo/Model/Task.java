@@ -44,7 +44,8 @@ public class Task {
     @Override
     public String toString() {
         return "{" +
-                "taskName=" + taskName +
-                ",isCompleted" + isCompleted + "}";
+                "id:" + id + "," +
+                "\ttaskName:" + taskName +
+                "," + "\tisCompleted:" + isCompleted + "}";
     }
 }
