@@ -4,14 +4,14 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
-class FirebasePropertiesFromFile implements FireBaseProperties {
+public class FirebasePropertiesFromFile implements FireBaseProperties {
 
     private static final String PROJECT_URL;
     private static final String PROJECT_ID;
 
     static {
         Properties properties = new Properties ( );
-        InputStream inputStream = null;
+        InputStream inputStream ;
         try {
             inputStream = new FileInputStream ( "/Users/rlokesh/Documents/Projects/todo/src/main/resources/configuration.properties" );
             properties.load ( inputStream );

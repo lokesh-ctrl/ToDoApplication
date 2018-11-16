@@ -35,6 +35,12 @@ public class Task {
         isCompleted = completed;
     }
 
+    public Task(String id, String taskName, boolean isCompleted) {
+        this.id = id;
+        this.taskName = taskName;
+        this.isCompleted = isCompleted;
+    }
+
     @Override
     public String toString() {
         return "{" +
