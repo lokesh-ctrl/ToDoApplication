@@ -1,12 +1,19 @@
 package com.example.todo.Controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.example.todo.Model.Task;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+import java.util.logging.Logger;
+
+@RestController
 public class TasksController {
-    @GetMapping(value = "/tasks")
-    public String returnTasks(){
-        return "";
+    private final static Logger LOGGER = Logger.getLogger ( Logger.GLOBAL_LOGGER_NAME );
+
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json")
+    public List<Task> returnTasks() {
+        return FirebaseDb.getAllTasks ( );
     }
 }

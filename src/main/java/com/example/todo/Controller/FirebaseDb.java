@@ -3,7 +3,6 @@ package com.example.todo.Controller;
 import com.example.todo.Firebase.FireBaseProperties;
 import com.example.todo.Firebase.FirebasePropertiesFromFile;
 import com.example.todo.Model.Task;
-import com.example.todo.Service.FirebaseCallback;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -49,7 +48,7 @@ class FirebaseDb {
         sync.await ( );
     }
 
-    public static List<Task> getAllTasks(FirebaseCallback firebaseCallback) {
+    public static List<Task> getAllTasks() {
         List<Task> tasks = new ArrayList<> ( );
         ref.addListenerForSingleValueEvent ( new ValueEventListener ( ) {
             @Override
@@ -60,13 +59,17 @@ class FirebaseDb {
                     String id = (String) taskSnap.child ( "id" ).getValue ( );
                     tasks.add ( new Task ( id, taskName, isCompleted ) );
                 }
-                firebaseCallback.onCallback ( String.valueOf ( tasks ) );
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         } );
+        try {
+            Thread.sleep ( 10000 );
+        } catch ( InterruptedException e ) {
+            e.printStackTrace ( );
+        }
         return tasks;
     }
 }
