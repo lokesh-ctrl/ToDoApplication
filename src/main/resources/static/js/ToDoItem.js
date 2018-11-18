@@ -6,48 +6,27 @@ export class ToDoItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: null,
-            taskName: null,
-            isChecked: null
+            task: null
         };
-        this.deleteTask = this.deleteTask.bind(this);
-        this.updateStatusOfTask = this.updateStatusOfTask.bind(this);
         this.renderTask = this.renderTask.bind(this);
     }
 
     renderTask() {
         return (
             <div className="viewtask">
-                <input id="checkBoxOfTask" onClick={this.updateStatusOfTask(this.state.id)} type="checkbox"
+                <input id="checkBoxOfTask" onClick={() => {
+                    this.props.updateTaskStatus(this.props.task.id, this.props.task.name, this.props.task.completed)
+                }} type="checkbox"
                        checked={this.props.task.isFinished}/>
                 <label id="taskName">{this.props.task.taskName}</label>
-                <button id="deleteTask" onClick={this.deleteTask(this.state.id)}/>
+                <button id="deleteTask" onClick={() => {
+                    this.props.deleteATask(this.state.id)
+                }}/>
             </div>
         )
     }
 
-    deleteTask(e) {
-        e.preventDefault()
-
-    }
-
-    updateStatusOfTask(id) {
-        this.setState(prevState => ({
-            isChecked: !prevState.isChecked
-        }))
-        axios({
-            method:'put',
-            url:'/tasks'+id,
-            data:{
-                id:this.state.id,
-                taskName:this.state.taskName,
-                isChecked:this.state.isChecked
-            }
-        })
-    }
-
-
     render() {
-        return( this.renderTask())
+        return (this.renderTask())
     }
 }

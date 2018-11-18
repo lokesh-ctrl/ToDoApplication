@@ -10,8 +10,9 @@ export class Index extends React.Component {
         return (
             <div>
                 <TodoHeader/>
-                <InputTaker/>
-                <ToDoItemsList taskList={this.props.tasks}/>
+                <InputTaker addTask={this.props.addTask}/>
+                <ToDoItemsList deleteATask={this.props.deleteATask} updateTaskStatus={this.props.updateTaskStatus}
+                               onClearCompleted={this.props.onClearCompleted} taskList={this.props.tasks}/>
                 <Footer/>
             </div>)
     }

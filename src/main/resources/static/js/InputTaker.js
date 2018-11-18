@@ -16,21 +16,16 @@ export class InputTaker extends React.Component {
 
     keyPress(pressedKey) {
         if (pressedKey.keyCode == 13) {
-            if (this.state.value){
-            axios({
-                method:'post',
-                url:'/tasks',
-                inputType:'application/json',
-                data:{newTaskName:this.state.value}
-            }).then(function (response) {
-                console.log(response)
-            })
-        }}
+            if (this.state.value) {
+                this.props.addTask(this.state.newTaskName)
+            }
+        }
     }
 
     render() {
         return (
-            <input className="new-todo" autoFocus={true} type="text" value={this.state.newTaskName} onKeyDown={this.keyPress}
+            <input className="new-todo" autoFocus={true} type="text" value={this.state.newTaskName}
+                   onKeyDown={this.keyPress}
                    onChange={this.handleChange} placeholder="What needs to be done?"/>
         )
     }
