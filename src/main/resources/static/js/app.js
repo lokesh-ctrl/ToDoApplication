@@ -18,6 +18,7 @@ export class App extends React.Component {
         this.deleteTask = this.deleteTask.bind(this)
         this.updateTaskStatus = this.updateTaskStatus.bind(this)
         this.addNewTask = this.addNewTask.bind(this)
+        this.updateTask = this.updateTask.bind(this)
     }
 
     componentWillMount() {
@@ -50,7 +51,7 @@ export class App extends React.Component {
     addNewTask(newTaskName) {
         let tasksRef = fire.database().ref('tasks');
         this.setState({id: this.state.id + 1})
-        let newTask = {id: this.state.id, completed: false, taskName: newTaskName}
+        let newTask = {id: this.state.id, isFinished: false, taskName: newTaskName}
         this.setState({tasks: [...this.state.tasks], newTask})
         tasksRef.push(newTask)
     }
@@ -75,8 +76,20 @@ export class App extends React.Component {
         })
     }
 
-    updateTaskStatus(taskKey, taskCurrentStatus) {
+    updateTask(taskKey, updatedStatus, updatedTaskId, updatedTaskName) {
+        let tasksRef = fire.database().ref('tasks');
+        tasksRef.update({
+            [taskKey]: {
+                id: updatedTaskId,
+                taskName: updatedTaskName,
+                isFinished: updatedStatus
+            }
+        })
+    }
 
+    updateTaskStatus(taskKey, currentStatus, taskId, taskName) {
+        let updateStatus = !currentStatus
+        this.updateTask(taskKey, updateStatus, taskId, taskName)
     }
 
     render() {
