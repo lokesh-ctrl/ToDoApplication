@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 class FirebaseDb {
     private final static FireBaseProperties firebaseProperties = new FirebasePropertiesFromFile ( );
@@ -43,9 +42,12 @@ class FirebaseDb {
     }
 
     public static void putTask(String position, Task task) throws InterruptedException {
-        final CountDownLatch sync = new CountDownLatch ( 1 );
         ref.child ( position ).setValueAsync ( task );
-        sync.await ( );
+        try {
+            Thread.sleep ( 10000 );
+        } catch ( InterruptedException e ) {
+            e.printStackTrace ( );
+        }
     }
 
     public static List<Task> getAllTasks() {
@@ -71,5 +73,14 @@ class FirebaseDb {
             e.printStackTrace ( );
         }
         return tasks;
+    }
+
+    public static void deleteTask(String taskId) {
+        ref.child ( taskId ).removeValueAsync ( );
+        try {
+            Thread.sleep ( 10000 );
+        } catch ( InterruptedException e ) {
+            e.printStackTrace ( );
+        }
     }
 }

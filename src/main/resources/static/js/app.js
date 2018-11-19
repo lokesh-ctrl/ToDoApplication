@@ -1,4 +1,5 @@
 import {Index} from "./indexer";
+import fire from './fire';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -16,38 +17,42 @@ export class App extends React.Component {
         this.clearCompletedInDb = this.clearCompletedInDb.bind(this)
         this.deleteTask = this.deleteTask.bind(this)
         this.updateTaskStatus = this.updateTaskStatus.bind(this)
-        this.deleteTaskInState = this.deleteTaskInState.bind(this)
         this.addNewTask = this.addNewTask.bind(this)
     }
 
-    componentDidMount() {
-        console.log('getting data from firebase')
-        this.getTasksFromDb()
+    componentWillMount() {
+        let tasksRef = fire.database().ref('tasks');
+        tasksRef.orderByKey().limitToLast(100).on('value', function (dataSnapShot) {
+            var tasks = [];
+            dataSnapShot.forEach(function (childSnapShot) {
+                console.log(childSnapShot)
+                var task = childSnapShot.val();
+                task['.key'] = childSnapShot.key;
+                tasks.push(task);
+            });
+            this.setState({
+                tasks: tasks
+            })
+        }.bind(this))
     }
 
     getTasksFromDb() {
         axios({
             method: 'get',
-            url: '/tasks',
+            url: 'https://todoapp-6c35d.firebaseio.com/tasks/.json',
         }).then(data => {
             console.log(data)
             this.setState({tasks: data.data})
         })
+        console.log(this.state.tasks)
     }
 
     addNewTask(newTaskName) {
+        let tasksRef = fire.database().ref('tasks');
         this.setState({id: this.state.id + 1})
-        let newTask = {"taskName": newTaskName, "id": this.state.id}
+        let newTask = {id: this.state.id, completed: false, taskName: newTaskName}
         this.setState({tasks: [...this.state.tasks], newTask})
-        axios({
-            method: 'post',
-            url: '/tasks',
-            inputType: 'application/json',
-            data: newTask
-        }).then(function (response) {
-            console.log(response.status())
-            console.log(response)
-        })
+        tasksRef.push(newTask)
     }
 
     clearCompleted() {
@@ -63,31 +68,12 @@ export class App extends React.Component {
         })
     }
 
-    deleteTask(deleteTaskId) {
-        if (deleteTaskId) {
-            axios({
-                method: 'delete',
-                url: '/tasks/' + deleteTaskId
-            }).then(function (response) {
-                console.log(response);
-            })
-            this.deleteTaskInState(deleteTaskId)
-        }
+    deleteTask(taskKey) {
+
     }
 
-    deleteTaskInState(taskId) {
-        this.setState({
-            tasks: this.state.tasks.filter(function (task) {
-                return task.id !== taskId
-            })
-        })
-    }
+    updateTaskStatus(taskKey, taskCurrentStatus) {
 
-    updateTaskStatus(taskId, taskName, presentStatus) {
-        let updatedStatus = (!presentStatus)
-        let updatedTask = {"taskName": taskName, "id": taskId, "isCompleted": updatedStatus}
-        this.deleteTaskInState(taskId)
-        this.setState({tasks: [...this.state.tasks], updatedTask})
     }
 
     render() {
