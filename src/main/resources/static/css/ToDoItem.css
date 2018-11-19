@@ -34,7 +34,7 @@ label {
 
 .deleteTaskButton {
     display: none;
-    content: 'x';
+    content: 'X';
     position: absolute;
     top: 0;
     right: 10px;

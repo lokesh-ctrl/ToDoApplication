@@ -37,7 +37,8 @@ export class ToDoItem extends React.Component {
                 <label className="taskNameView">{this.props.task.taskName}</label>
                 <button className="deleteTaskButton" onClick={() => {
                     this.props.deleteATask(this.props.task[".key"])
-                }}/>
+                }}>x
+                </button>
             </div>
         )
     }
