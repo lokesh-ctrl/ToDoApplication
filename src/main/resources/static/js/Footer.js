@@ -4,27 +4,19 @@ export class Footer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pendingTasksCount: 1,
+            pendingTasksCount: 0,
             completedTasksCount: 0
         }
         this.renderFooter = this.renderFooter.bind(this)
         this.renderClearCompletedDiv = this.renderClearCompletedDiv.bind(this)
-        this.clearCompleted = this.clearCompleted.bind(this)
-    }
-
-    componentWillMount() {
-        this.setState({
-            pendingTasksCount: this.props.pendingTasksCount,
-            completedTasksCount: this.props.completedTasksCount
-        })
     }
 
     renderFooter() {
-        if (this.state.pendingTasksCount || this.state.completedTasksCount) {
+        if (this.props.pendingTasksCount || this.props.completedTasksCount) {
             return (
                 <footer>
                     <div className="pendingTasks">
-                        <span><strong>{this.state.pendingTasksCount}</strong>" items left"</span>
+                        <span><strong>{this.props.pendingTasksCount}</strong>" items left"</span>
                     </div>
                     <div className="taskFilters">
                         <ul>
@@ -43,27 +35,23 @@ export class Footer extends React.Component {
                 </footer>
             )
         }
-        else{
-            return(
+        else {
+            return (
                 <div></div>
             )
         }
     }
 
     renderClearCompletedDiv() {
-        if (this.state.completedTasksCount > 0) {
+        if (this.props.completedTasksCount > 0) {
             return (<div>
-                    <button onClick={this.clearCompleted}>clear Completed</button>
+                    <button onClick={this.props.clearCompleted}>clear Completed</button>
                 </div>
             )
         }
         else return (
             <div></div>
         )
-    }
-
-    clearCompleted(){
-
     }
 
     render() {

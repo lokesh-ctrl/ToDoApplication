@@ -11,7 +11,9 @@ export class App extends React.Component {
         super(props)
         this.state = {
             tasks: [],
-            id: 0
+            id: 0,
+            pendingTasksCount: 0,
+            completedTasksCount: 0
         }
         this.getTasksFromDb = this.getTasksFromDb.bind(this)
         this.clearCompleted = this.clearCompleted.bind(this)
@@ -25,13 +27,24 @@ export class App extends React.Component {
         let tasksRef = fire.database().ref('tasks');
         tasksRef.orderByKey().limitToLast(100).on('value', function (dataSnapShot) {
             var tasks = [];
+            var pendingTasksCount = 0;
+            var completedTasksCount = 0;
             dataSnapShot.forEach(function (childSnapShot) {
                 var task = childSnapShot.val();
                 task['.key'] = childSnapShot.key;
                 tasks.push(task);
+                console.log(task)
+                if (task.isFinished) {
+                    completedTasksCount = completedTasksCount + 1;
+                }
+                else {
+                    pendingTasksCount = pendingTasksCount + 1;
+                }
             });
             this.setState({
-                tasks: tasks
+                tasks: tasks,
+                pendingTasksCount: pendingTasksCount,
+                completedTasksCount: completedTasksCount
             })
         }.bind(this))
     }
@@ -90,7 +103,10 @@ export class App extends React.Component {
         return (
             <Index onClearCompleted={this.clearCompleted} updateTaskStatus={this.updateTaskStatus}
                    addTask={this.addNewTask} deleteATask={this.deleteTask}
-                   tasks={this.state.tasks}/>
+                   tasks={this.state.tasks} pendingTasksCount={this.state.pendingTasksCount}
+                   completedTasksCount={this.state.completedTasksCount}
+                   clearCompleted={this.clearCompleted}
+            />
         )
     }
 }
