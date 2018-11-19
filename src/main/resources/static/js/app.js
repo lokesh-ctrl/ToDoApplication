@@ -1,5 +1,6 @@
 import {Index} from "./indexer";
 import fire from './fire';
+import './../css/app.css'
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -14,7 +15,6 @@ export class App extends React.Component {
         }
         this.getTasksFromDb = this.getTasksFromDb.bind(this)
         this.clearCompleted = this.clearCompleted.bind(this)
-        this.clearCompletedInDb = this.clearCompletedInDb.bind(this)
         this.deleteTask = this.deleteTask.bind(this)
         this.updateTaskStatus = this.updateTaskStatus.bind(this)
         this.addNewTask = this.addNewTask.bind(this)
@@ -56,14 +56,9 @@ export class App extends React.Component {
     }
 
     clearCompleted() {
-        this.clearCompletedInDb()
-        this.getTasksFromDb()
-    }
-
-    clearCompletedInDb() {
         this.state.tasks.map(function (task, index) {
             if (task.isFinished) {
-                deleteTask(task.id)
+                this.deleteTask(task[".key"])
             }
         })
     }

@@ -8,7 +8,6 @@
   },
   "keywords": [
     "rest",
-    "hateoas",
     "spring",
     "data",
     "react"
@@ -31,14 +30,16 @@
     "watch": "webpack --watch -d"
   },
   "devDependencies": {
-    "babel-loader": "^8.0.2",
     "@babel/core": "^7.1.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.0",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.1",
+    "json5": "latest",
     "mkdirp": "^0.5.1",
-    "json5": "latest"
+    "style-loader": "^0.23.1",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0"
   }
 }
