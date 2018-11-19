@@ -4,7 +4,7 @@ const axios = require('axios');
 export class InputTaker extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {newTaskName: null}
+        this.state = {newTaskName: ""}
 
         this.handleChange = this.handleChange.bind(this);
         this.keyPress = this.keyPress.bind(this);
@@ -18,7 +18,7 @@ export class InputTaker extends React.Component {
         if (pressedKey.keyCode == 13) {
             if (this.state.newTaskName) {
                 this.props.addTask(this.state.newTaskName)
-                this.setState({newTaskName: null})
+                this.setState({newTaskName: ""})
             }
         }
     }
