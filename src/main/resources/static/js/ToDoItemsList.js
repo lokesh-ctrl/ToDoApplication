@@ -22,7 +22,7 @@ export class ToDoItemsList extends React.Component {
         }
         else {
             return (
-                <div>
+                <div className="taskslist">
                     {this.renderList()}
                 </div>
             );
