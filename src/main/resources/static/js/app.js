@@ -69,7 +69,10 @@ export class App extends React.Component {
     }
 
     deleteTask(taskKey) {
-
+        let tasksRef = fire.database().ref('tasks');
+        tasksRef.update({
+            [taskKey]: null
+        })
     }
 
     updateTaskStatus(taskKey, taskCurrentStatus) {

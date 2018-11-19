@@ -11,13 +11,14 @@ export class InputTaker extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({newTaskName: event.target.value});
     }
 
     keyPress(pressedKey) {
         if (pressedKey.keyCode == 13) {
-            if (this.state.value) {
+            if (this.state.newTaskName) {
                 this.props.addTask(this.state.newTaskName)
+                this.setState({newTaskName: null})
             }
         }
     }
