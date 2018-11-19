@@ -12,7 +12,7 @@ export class ToDoItem extends React.Component {
     renderTask() {
         return (
             <div className="viewtask">
-                <input id="checkBoxOfTask" onClick={() => {
+                <input id="checkBoxOfTask" onChange={() => {
                     this.props.updateTaskStatus(this.props.task[".key"], this.props.task.isFinished, this.props.task.id, this.props.task.taskName)
                 }} type="checkbox"
                        checked={this.props.task.isFinished}/>
