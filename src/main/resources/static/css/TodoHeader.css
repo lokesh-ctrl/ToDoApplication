@@ -1,0 +1,10 @@
+.header {
+    height: auto;
+    width: auto;
+}
+
+.todoheading {
+    font-size: 600%;
+    text-align: center;
+    color: #ead7d8;
+}

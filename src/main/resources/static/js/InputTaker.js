@@ -1,5 +1,6 @@
 const React = require('react')
 const axios = require('axios');
+import './../css/InputTaker.css'
 
 export class InputTaker extends React.Component {
     constructor(props) {
