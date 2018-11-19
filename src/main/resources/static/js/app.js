@@ -26,7 +26,6 @@ export class App extends React.Component {
         tasksRef.orderByKey().limitToLast(100).on('value', function (dataSnapShot) {
             var tasks = [];
             dataSnapShot.forEach(function (childSnapShot) {
-                console.log(childSnapShot)
                 var task = childSnapShot.val();
                 task['.key'] = childSnapShot.key;
                 tasks.push(task);

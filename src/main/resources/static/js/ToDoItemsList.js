@@ -4,7 +4,6 @@ const React = require('react')
 
 export class ToDoItemsList extends React.Component {
     renderList() {
-        console.log(this.props.taskList);
         const tasksList = this.props.taskList.map(task =>
             <ToDoItem task={task} key={task[".key"]} deleteATask={this.props.deleteATask}
                       updateTaskStatus={this.props.updateTaskStatus}/>
