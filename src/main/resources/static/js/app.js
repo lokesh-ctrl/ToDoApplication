@@ -13,7 +13,9 @@ export class App extends React.Component {
             tasks: [],
             id: 0,
             pendingTasksCount: 0,
-            completedTasksCount: 0
+            completedTasksCount: 0,
+            nowShowing: 'ALL',
+            showingTasks: []
         }
         this.getTasksFromDb = this.getTasksFromDb.bind(this)
         this.clearCompleted = this.clearCompleted.bind(this)
@@ -69,9 +71,10 @@ export class App extends React.Component {
     }
 
     clearCompleted() {
-        this.state.tasks.map(function (task, index) {
+        let deleteTask = this.deleteTask;
+        this.state.tasks.map(function (task) {
             if (task.isFinished) {
-                this.deleteTask(task[".key"])
+                deleteTask(task[".key"])
             }
         })
     }
@@ -100,14 +103,24 @@ export class App extends React.Component {
     }
 
     render() {
+        let nowShowing = this.state.nowShowing;
+        let tasksToBeShow = this.state.tasks.filter(function (task) {
+            switch (nowShowing) {
+                case 'ACTIVE':
+                    return !task.isFinished;
+                case 'COMPLETED':
+                    return task.isFinished;
+                default:
+                    return true;
+            }
+        });
         return (
             <Index onClearCompleted={this.clearCompleted} updateTaskStatus={this.updateTaskStatus}
                    addTask={this.addNewTask} deleteATask={this.deleteTask}
-                   tasks={this.state.tasks} pendingTasksCount={this.state.pendingTasksCount}
+                   tasks={tasksToBeShow} pendingTasksCount={this.state.pendingTasksCount}
                    completedTasksCount={this.state.completedTasksCount}
                    clearCompleted={this.clearCompleted}
-            />
-        )
+            />)
     }
 }
 
@@ -115,6 +128,3 @@ ReactDOM.render(
     <App/>,
     document.getElementById('app')
 )
-
-
-
