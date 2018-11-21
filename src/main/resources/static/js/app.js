@@ -23,6 +23,7 @@ export class App extends React.Component {
         this.updateTaskStatus = this.updateTaskStatus.bind(this)
         this.addNewTask = this.addNewTask.bind(this)
         this.updateTask = this.updateTask.bind(this)
+        this.switchNowShowing = this.switchNowShowing.bind(this)
     }
 
     componentWillMount() {
@@ -45,6 +46,7 @@ export class App extends React.Component {
             });
             this.setState({
                 tasks: tasks,
+                showingTasks: tasks,
                 pendingTasksCount: pendingTasksCount,
                 completedTasksCount: completedTasksCount
             })
@@ -102,24 +104,18 @@ export class App extends React.Component {
         this.updateTask(taskKey, updateStatus, taskId, taskName)
     }
 
+    switchNowShowing(clickedItem) {
+        this.setState({nowShowing: clickedItem})
+    }
+
     render() {
-        let nowShowing = this.state.nowShowing;
-        let tasksToBeShow = this.state.tasks.filter(function (task) {
-            switch (nowShowing) {
-                case 'ACTIVE':
-                    return !task.isFinished;
-                case 'COMPLETED':
-                    return task.isFinished;
-                default:
-                    return true;
-            }
-        });
         return (
             <Index onClearCompleted={this.clearCompleted} updateTaskStatus={this.updateTaskStatus}
                    addTask={this.addNewTask} deleteATask={this.deleteTask}
-                   tasks={tasksToBeShow} pendingTasksCount={this.state.pendingTasksCount}
+                   tasks={this.state.tasks} pendingTasksCount={this.state.pendingTasksCount}
                    completedTasksCount={this.state.completedTasksCount}
-                   clearCompleted={this.clearCompleted}
+                   clearCompleted={this.clearCompleted} switchNowShowing={this.switchNowShowing}
+                   nowShowing={this.state.nowShowing}
             />)
     }
 }

@@ -19,17 +19,12 @@ export class Footer extends React.Component {
                         <span><strong>{this.props.pendingTasksCount}</strong>" items left"</span>
                     </div>
                     <div className="taskFilters">
-                        <ul>
-                            <li>
-                                <button>All</button>
-                            </li>
-                            <li>
-                                <button>Active</button>
-                            </li>
-                            <li>
-                                <button>Completed</button>
-                            </li>
-                        </ul>
+                        <Button content='ALL' nowShowing={this.props.nowShowing}
+                                switchNowShowing={this.props.switchNowShowing}/>
+                        <Button content='ACTIVE' nowShowing={this.props.nowShowing}
+                                switchNowShowing={this.props.switchNowShowing}/>
+                        <Button content='COMPLETED' nowShowing={this.props.nowShowing}
+                                switchNowShowing={this.props.switchNowShowing}/>
                     </div>
                     {this.renderClearCompletedDiv()}
                 </footer>
@@ -56,5 +51,24 @@ export class Footer extends React.Component {
 
     render() {
         return (this.renderFooter())
+    }
+}
+
+class Button extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {classNameOfButton: ''}
+        this.onClick = this.onClick.bind(this)
+    }
+
+    onClick() {
+        this.props.switchNowShowing(this.props.content)
+    }
+
+    render() {
+        return (
+            <button onClick={this.onClick}
+                    className={this.props.content == this.props.nowShowing ? 'active' : null}>{this.props.content}</button>
+        )
     }
 }

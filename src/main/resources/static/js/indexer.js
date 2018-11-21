@@ -14,10 +14,11 @@ export class Index extends React.Component {
                 <section className="todoapp">
                     <InputTaker addTask={this.props.addTask}/>
                     <ToDoItemsList deleteATask={this.props.deleteATask} updateTaskStatus={this.props.updateTaskStatus}
-                                   onClearCompleted={this.props.onClearCompleted} taskList={this.props.tasks}/>
+                                   onClearCompleted={this.props.onClearCompleted} taskList={this.props.tasks}
+                                   nowShowing={this.props.nowShowing}/>
                     <Footer pendingTasksCount={this.props.pendingTasksCount}
                             completedTasksCount={this.props.completedTasksCount}
-                            clearCompleted={this.props.clearCompleted}/>
+                            clearCompleted={this.props.clearCompleted} switchNowShowing={this.props.switchNowShowing}/>
                 </section>
             </div>)
     }
