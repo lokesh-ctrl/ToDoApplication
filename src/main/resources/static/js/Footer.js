@@ -1,4 +1,5 @@
 const React = require('react')
+import './../css/Footer.css'
 
 export class Footer extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export class Footer extends React.Component {
             return (
                 <footer>
                     <div className="pendingTasks">
-                        <span><strong>{this.props.pendingTasksCount}</strong>" items left"</span>
+                        <span><strong>{this.props.pendingTasksCount}</strong> items left</span>
                     </div>
                     <div className="taskFilters">
                         <Button content='ALL' nowShowing={this.props.nowShowing}
@@ -39,8 +40,9 @@ export class Footer extends React.Component {
 
     renderClearCompletedDiv() {
         if (this.props.completedTasksCount > 0) {
-            return (<div>
-                    <button onClick={this.props.clearCompleted}>clear Completed</button>
+            return (<div className="clearCompleted">
+                    <button className="clearCompletedButton" onClick={this.props.clearCompleted}><strong>Clear
+                        completed</strong></button>
                 </div>
             )
         }
@@ -48,7 +50,6 @@ export class Footer extends React.Component {
             <div></div>
         )
     }
-
     render() {
         return (this.renderFooter())
     }
@@ -68,7 +69,7 @@ class Button extends React.Component {
     render() {
         return (
             <button onClick={this.onClick}
-                    className={this.props.content == this.props.nowShowing ? 'active' : null}>{this.props.content}</button>
+                    className={this.props.content === this.props.nowShowing ? 'active' : null}>{this.props.content}</button>
         )
     }
 }

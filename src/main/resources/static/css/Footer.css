@@ -1,0 +1,30 @@
+footer {
+    color: #777;
+    padding: 10px 15px;
+    height: 20px;
+    border-top: 1px solid #e6e6e6;
+}
+
+.taskFilters {
+    margin: 0;
+    padding: 0 0 0 10px;
+    float: left;
+}
+
+.active {
+    border-color: rgba(175, 47, 47, 0.2);
+}
+
+.pendingTasks {
+    float: left;
+}
+
+.clearCompleted {
+    float: right;
+}
+
+button {
+    border: none;
+    margin-left: 10px;
+    background-color: transparent
+}
