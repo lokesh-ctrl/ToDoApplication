@@ -41,7 +41,7 @@ export class Footer extends React.Component {
     renderClearCompletedDiv() {
         if (this.props.completedTasksCount > 0) {
             return (<div className="clearCompleted">
-                    <button className="clearCompletedButton" onClick={this.props.clearCompleted}><strong>Clear
+                    <button className="clearCompletedButton" onClick={this.props.clearCompletedTasks}><strong>Clear
                         completed</strong></button>
                 </div>
             )
@@ -50,6 +50,7 @@ export class Footer extends React.Component {
             <div></div>
         )
     }
+
     render() {
         return (this.renderFooter())
     }

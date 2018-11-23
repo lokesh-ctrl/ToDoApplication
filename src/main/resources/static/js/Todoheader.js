@@ -1,7 +1,7 @@
 const React = require('react')
 import './../css/TodoHeader.css'
 
-export class TodoHeader extends React.Component {
+export class Todoheader extends React.Component {
     render() {
         return (
             <div id="todoHeader" className="header">

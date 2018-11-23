@@ -1,6 +1,6 @@
-import {Index} from "./indexer";
+import {Index} from "./Indexer";
 import fire from './fire';
-import './../css/app.css'
+import '../css/App.css'
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -17,11 +17,10 @@ export class App extends React.Component {
             nowShowing: 'ALL',
             showingTasks: []
         }
-        this.getTasksFromDb = this.getTasksFromDb.bind(this)
-        this.clearCompleted = this.clearCompleted.bind(this)
+        this.addNewTask = this.addNewTask.bind(this)
+        this.clearCompletedTasks = this.clearCompletedTasks.bind(this)
         this.deleteTask = this.deleteTask.bind(this)
         this.updateTaskStatus = this.updateTaskStatus.bind(this)
-        this.addNewTask = this.addNewTask.bind(this)
         this.updateTask = this.updateTask.bind(this)
         this.switchNowShowing = this.switchNowShowing.bind(this)
     }
@@ -53,17 +52,6 @@ export class App extends React.Component {
         }.bind(this))
     }
 
-    getTasksFromDb() {
-        axios({
-            method: 'get',
-            url: 'https://todoapp-6c35d.firebaseio.com/tasks/.json',
-        }).then(data => {
-            console.log(data)
-            this.setState({tasks: data.data})
-        })
-        console.log(this.state.tasks)
-    }
-
     addNewTask(newTaskName) {
         let tasksRef = fire.database().ref('tasks');
         this.setState({id: this.state.id + 1})
@@ -72,7 +60,7 @@ export class App extends React.Component {
         tasksRef.push(newTask)
     }
 
-    clearCompleted() {
+    clearCompletedTasks() {
         let deleteTask = this.deleteTask;
         this.state.tasks.map(function (task) {
             if (task.isFinished) {
@@ -110,11 +98,11 @@ export class App extends React.Component {
 
     render() {
         return (
-            <Index onClearCompleted={this.clearCompleted} updateTaskStatus={this.updateTaskStatus}
+            <Index onClearCompleted={this.clearCompletedTasks} updateTaskStatus={this.updateTaskStatus}
                    addTask={this.addNewTask} deleteATask={this.deleteTask}
                    tasks={this.state.tasks} pendingTasksCount={this.state.pendingTasksCount}
                    completedTasksCount={this.state.completedTasksCount}
-                   clearCompleted={this.clearCompleted} switchNowShowing={this.switchNowShowing}
+                   clearCompleted={this.clearCompletedTasks} switchNowShowing={this.switchNowShowing}
                    nowShowing={this.state.nowShowing}
             />)
     }
