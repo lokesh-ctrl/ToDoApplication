@@ -35,7 +35,6 @@ export class App extends React.Component {
                 var task = childSnapShot.val();
                 task['.key'] = childSnapShot.key;
                 tasks.push(task);
-                console.log(task)
                 if (task.isFinished) {
                     completedTasksCount = completedTasksCount + 1;
                 }
@@ -77,6 +76,8 @@ export class App extends React.Component {
     }
 
     updateTask(taskKey, updatedStatus, updatedTaskId, updatedTaskName) {
+        console.log("caling update status")
+        console.log(taskKey+updatedStatus+updatedTaskId+updatedTaskName)
         let tasksRef = fire.database().ref('tasks');
         tasksRef.update({
             [taskKey]: {
@@ -104,6 +105,7 @@ export class App extends React.Component {
                    completedTasksCount={this.state.completedTasksCount}
                    clearCompleted={this.clearCompletedTasks} switchNowShowing={this.switchNowShowing}
                    nowShowing={this.state.nowShowing}
+                   updateTask={this.updateTask}
             />)
     }
 }

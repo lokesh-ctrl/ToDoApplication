@@ -18,7 +18,7 @@ export class ToDoItemsList extends React.Component {
         });
         const tasksList = tasksToBeShow.map(task =>
             <ToDoItem task={task} key={task[".key"]} deleteATask={this.props.deleteATask}
-                      updateTaskStatus={this.props.updateTaskStatus}/>
+                      updateTaskStatus={this.props.updateTaskStatus} updateTask={this.props.updateTask}/>
         );
         return (
             <div className="taskList">

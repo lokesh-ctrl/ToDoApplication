@@ -15,7 +15,7 @@ export class Index extends React.Component {
                     <InputTaker addTask={this.props.addTask}/>
                     <ToDoItemsList deleteATask={this.props.deleteATask} updateTaskStatus={this.props.updateTaskStatus}
                                    onClearCompleted={this.props.onClearCompleted} taskList={this.props.tasks}
-                                   nowShowing={this.props.nowShowing}/>
+                                   nowShowing={this.props.nowShowing} updateTask={this.props.updateTask}/>
                     <Footer pendingTasksCount={this.props.pendingTasksCount}
                             completedTasksCount={this.props.completedTasksCount}
                             clearCompleted={this.props.clearCompletedTasks}
