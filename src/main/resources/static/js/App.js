@@ -76,8 +76,6 @@ export class App extends React.Component {
     }
 
     updateTask(taskKey, updatedStatus, updatedTaskId, updatedTaskName) {
-        console.log("caling update status")
-        console.log(taskKey+updatedStatus+updatedTaskId+updatedTaskName)
         let tasksRef = fire.database().ref('tasks');
         tasksRef.update({
             [taskKey]: {

@@ -41,8 +41,6 @@ export class ToDoItem extends React.Component {
     }
 
     handleSubmit() {
-        console.log(this.state.task)
-        console.log(this.state.editText)
         this.props.updateTask(this.state.task[".key"], this.state.task.isFinished, this.state.task.id, this.state.editText);
         this.setState({classNameOnEdit: "notEditing"})
     }
@@ -58,10 +56,7 @@ export class ToDoItem extends React.Component {
     }
 
     handleChangeText(event) {
-        console.log("triggered on change event")
-        console.log(event.target.value)
         this.setState({editText: event.target.value})
-        console.log(this.state.editText)
     }
 
     renderTask() {
